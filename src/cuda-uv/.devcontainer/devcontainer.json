@@ -17,6 +17,7 @@
         "ms-python.vscode-pylance"
       ],
       "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
         "python.defaultInterpreterPath": "/home/vscode/.venv/bin/python",
         "python.analysis.autoSearchPaths": true,
         "python.analysis.extraPaths": [
