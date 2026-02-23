@@ -1,0 +1,62 @@
+# Git Ignore for Dev Container Templates Repository
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Build Artifacts
+*.o
+*.a
+*.so
+*.lo
+*.la
+*.pyc
+*.pyo
+*.class
+*.jar
+*.war
+*.ear
+*.dll
+*.exe
+*.obj
+*.lib
+*.exp
+*.ilk
+*.pdb
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+.#*
+
+# VS Code specific (if any local config is generated for this repo itself)
+.vscode/
+.history/
+
+# Node.js (if any tooling was added for template development)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Docker
+.dockerignore
+!src/*/Dockerfile
+!src/*/devcontainer.json
+!src/*/devcontainer-template.json
+
+# Local temp files
+tmp/
+*.temp
+*.swp
+*.swo

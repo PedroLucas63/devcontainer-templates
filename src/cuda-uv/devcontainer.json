@@ -1,0 +1,30 @@
+{
+  "name": "CUDA 12 + UV",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "INSTALL_PYTHON_VERSION": "${templateOption:pythonVersion}"
+    }
+  },
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=global-uv-cache,target=/home/vscode/.cache/uv,type=volume"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/home/vscode/.venv/bin/python",
+        "python.analysis.autoSearchPaths": true,
+        "python.analysis.extraPaths": [
+          "${containerWorkspaceFolder}/.venv/lib/${templateOption:pythonVersion}/site-packages"
+        ],
+        "python.envFile": "${containerWorkspaceFolder}/.env"
+      }
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh ${templateOption:pythonVersion} \"${templateOption:projectName}\" ${templateOption:runInitialSetup}"
+}

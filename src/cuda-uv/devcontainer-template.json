@@ -1,0 +1,23 @@
+{
+    "id": "cuda-uv",
+    "version": "1.0.0",
+    "name": "CUDA 12 + UV Template",
+    "description": "Professional CUDA 12 development environment with 'uv' for Python package management and shared cache.",
+    "options": {
+        "pythonVersion": {
+            "type": "string",
+            "description": "Python version to use (e.g., 3.12, 3.11)",
+            "default": "3.12"
+        },
+        "projectName": {
+            "type": "string",
+            "description": "Project name for initial 'uv init' (if setup is enabled)",
+            "default": "my-cuda-project"
+        },
+        "runInitialSetup": {
+            "type": "boolean",
+            "description": "Run initial setup (uv init + uv sync) if project doesn't exist?",
+            "default": true
+        }
+    }
+}
