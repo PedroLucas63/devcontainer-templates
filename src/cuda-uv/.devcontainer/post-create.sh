@@ -32,8 +32,12 @@ else
     if [ "${RUN_INITIAL_SETUP}" = "true" ]; then
         echo "No pyproject.toml found and initial project setup is enabled."
         echo "Initializing a new uv project."
-        # uv init will create pyproject.toml and potentially install some default packages (like pip, setuptools)
-        uv init --python "${PYTHON_VERSION}"
+        # uv init will create pyproject.toml
+        if [ -n "${PROJECT_NAME}" ]; then
+            uv init --name "${PROJECT_NAME}" --python "${PYTHON_VERSION}"
+        else
+            uv init --python "${PYTHON_VERSION}"
+        fi
         echo "Project initialized. Running uv sync."
         uv sync
     else

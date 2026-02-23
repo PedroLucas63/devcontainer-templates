@@ -16,8 +16,8 @@ Este template oferece um ambiente de desenvolvimento robusto para projetos Pytho
 Ao criar um Dev Container a partir deste template, você será questionado sobre as seguintes opções:
 
 *   **`pythonVersion`**: A versão do Python que o `uv` deve utilizar para o ambiente virtual. (Ex: `3.12`, `3.11`).
-*   **`projectName`**: Um nome conceitual para o seu projeto. Este nome pode ser usado em scripts de inicialização ou na configuração de um `pyproject.toml` inicial, se a opção `runInitialSetup` estiver ativada.
-*   **`runInitialSetup`**: Se `true` (padrão), o `postCreateCommand` tentará inicializar um projeto `uv` (`uv init`) se não houver um `pyproject.toml` existente e, em seguida, executará `uv sync` para instalar as dependências. Se `false`, apenas um ambiente virtual com a versão do Python especificada será configurado.
+*   **`projectName`**: Nome do projeto para `uv init`. Se deixado vazio, o nome do diretório atual será utilizado. (Ignorado se `runInitialSetup` estiver desativado).
+*   **`runInitialSetup`**: Se `true` (padrão), o `postCreateCommand` inicializará um projeto `uv` (`uv init`) se não houver um `pyproject.toml`. Se `false`, criará apenas um ambiente virtual (`.venv`) com a versão do Python especificada.
 
 ## Como o `uv` Gerencia o Python
 

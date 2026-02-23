@@ -11,12 +11,12 @@
         },
         "projectName": {
             "type": "string",
-            "description": "Project name for initial 'uv init' (if setup is enabled)",
-            "default": "my-cuda-project"
+            "description": "Project name for 'uv init'. If empty, the current directory name will be used. (Ignored if 'Initialize uv project' is disabled)",
+            "default": ""
         },
         "runInitialSetup": {
             "type": "boolean",
-            "description": "Run initial setup (uv init + uv sync) if project doesn't exist?",
+            "description": "Initialize a full 'uv' project (uv init)? If disabled, only a virtual environment will be created.",
             "default": true
         }
     }
