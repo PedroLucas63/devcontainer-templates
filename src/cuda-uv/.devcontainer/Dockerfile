@@ -1,5 +1,5 @@
-# Base image with CUDA 12 development headers
-FROM nvidia/cuda:12.8.0-devel-ubuntu22.04
+# Base image with CUDA 12 and cuDNN development headers
+FROM nvidia/cuda:12.8.0-cudnn-devel-ubuntu22.04
 
 # Avoid interaction with apt-get
 ENV DEBIAN_FRONTEND=noninteractive
@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1-mesa-glx \
     libglib2.0-0 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install starship prompt
+RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # Create a non-root user 'vscode' with sudo access
 ARG USERNAME=vscode
@@ -46,3 +49,6 @@ ENV PATH="/home/$USERNAME/.local/bin:${PATH}"
 
 # The actual Python management will be done by 'uv' within the workspace.
 # We don't pre-install a specific Python here to let 'uv' handle it dynamically.
+
+# Initialize Starship prompt in .bashrc
+RUN echo 'eval "$(starship init bash)"' >> /home/$USERNAME/.bashrc
