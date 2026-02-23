@@ -36,19 +36,20 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 ENV UV_CACHE_DIR=/home/$USERNAME/.cache/uv
 ENV UV_LINK_MODE=copy
 # Ensure the cache directory exists and is owned by the user
-RUN mkdir -p /home/$USERNAME/.cache/uv && chown -R $USERNAME:$USERNAME /home/$USERNAME/.cache/uv
+RUN mkdir -p /home/$USERNAME/.cache && chown -R $USERNAME:$USERNAME /home/$USERNAME/.cache
+
+# Create starship cache directory and ensure it's owned by the user
+RUN mkdir -p /home/$USERNAME/.cache/starship \
+    && chown -R $USERNAME:$USERNAME /home/$USERNAME/.cache
+# Initialize Starship prompt in .bashrc
+RUN echo 'eval "$(starship init bash)"' >> /home/$USERNAME/.bashrc
+
+# Ensure the entire home directory is owned by the user
+RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
 
 # Use the non-root user for development
 USER $USERNAME
 WORKDIR /workspaces
 
-# Add UV to PATH (the install script typically puts it in ~/.local/bin if not specified)
-# But since we used UV_INSTALL_DIR=/usr/local/bin, it should be already in path.
-# Let's ensure ~/.local/bin is in path just in case.
+# Ensure ~/.local/bin is in PATH
 ENV PATH="/home/$USERNAME/.local/bin:${PATH}"
-
-# The actual Python management will be done by 'uv' within the workspace.
-# We don't pre-install a specific Python here to let 'uv' handle it dynamically.
-
-# Initialize Starship prompt in .bashrc
-RUN echo 'eval "$(starship init bash)"' >> /home/$USERNAME/.bashrc

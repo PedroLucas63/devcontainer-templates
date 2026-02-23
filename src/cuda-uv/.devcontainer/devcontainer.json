@@ -6,6 +6,12 @@
       "INSTALL_PYTHON_VERSION": "${templateOption:pythonVersion}"
     }
   },
+  "runArgs": [
+    "--gpus=all"
+  ],
+  "hostRequirements": {
+    "gpu": "optional"
+  },
   "remoteUser": "vscode",
   "mounts": [
     "source=global-uv-cache,target=/home/vscode/.cache/uv,type=volume"
