@@ -1,10 +1,7 @@
 {
   "name": "CUDA 12 + UV",
   "build": {
-    "dockerfile": "Dockerfile",
-    "args": {
-      "INSTALL_PYTHON_VERSION": "${templateOption:pythonVersion}"
-    }
+    "dockerfile": "Dockerfile"
   },
   "runArgs": [
     "--gpus=all"
@@ -26,9 +23,6 @@
         "terminal.integrated.defaultProfile.linux": "bash",
         "python.defaultInterpreterPath": "/home/vscode/.venv/bin/python",
         "python.analysis.autoSearchPaths": true,
-        "python.analysis.extraPaths": [
-          "${containerWorkspaceFolder}/.venv/lib/${templateOption:pythonVersion}/site-packages"
-        ],
         "python.envFile": "${containerWorkspaceFolder}/.env"
       }
     }

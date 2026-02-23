@@ -1,53 +1,52 @@
-#!/bin/bash
-
-# Exit immediately if a command exits with a non-zero status.
+#!/usr/bin/env bash
 set -e
 
-PYTHON_VERSION=$1
-PROJECT_NAME=$2
-RUN_INITIAL_SETUP=$3
+PYTHON_VERSION="$1"
+PROJECT_NAME="$2"
+RUN_INITIAL_SETUP="$3"
 
-echo "--- Post-Create Script Started ---"
-echo "Python Version: ${PYTHON_VERSION}"
-echo "Project Name: ${PROJECT_NAME}"
-echo "Run Initial Setup: ${RUN_INITIAL_SETUP}"
+echo "=== Post-create ==="
+echo "Python version: ${PYTHON_VERSION}"
+echo "Project name: ${PROJECT_NAME}"
+echo "Run initial setup: ${RUN_INITIAL_SETUP}"
 
-# Ensure uv is in PATH
 export PATH="/usr/local/bin:${PATH}"
 
-# Always ensure a virtual environment is created and activated
+# ------------------------------------------------------------------
+# 1️⃣ SEMPRE garantir que a .venv exista
+# ------------------------------------------------------------------
 if [ ! -d ".venv" ]; then
-    echo "Creating virtual environment with uv for Python ${PYTHON_VERSION}."
-    uv venv --python "${PYTHON_VERSION}"
+  echo "Creating virtual environment (.venv) with Python ${PYTHON_VERSION}"
+  uv venv --python "${PYTHON_VERSION}"
 fi
 
-# Activate the virtual environment
 source .venv/bin/activate
 
-# Check for existing pyproject.toml for project-specific dependencies
+# ------------------------------------------------------------------
+# 2️⃣ Se existir projeto → sync
+# ------------------------------------------------------------------
 if [ -f "pyproject.toml" ]; then
-    echo "pyproject.toml found. Running uv sync to install dependencies."
-    uv sync
-else
-    if [ "${RUN_INITIAL_SETUP}" = "true" ]; then
-        echo "No pyproject.toml found and initial project setup is enabled."
-        echo "Initializing a new uv project."
-        # uv init will create pyproject.toml
-        if [ -n "${PROJECT_NAME}" ]; then
-            uv init --name "${PROJECT_NAME}" --python "${PYTHON_VERSION}"
-        else
-            uv init --python "${PYTHON_VERSION}"
-        fi
-        echo "Project initialized. Running uv sync."
-        uv sync
-    else
-        echo "No pyproject.toml found. Initial project setup skipped."
-        echo "A virtual environment for Python ${PYTHON_VERSION} is available."
-    fi
+  echo "pyproject.toml found → running uv sync"
+  uv sync
+  exit 0
 fi
 
-# Inform user about Python interpreter for VS Code.
-# The devcontainer.json already points VS Code to the .venv/bin/python.
-echo "Default Python interpreter for VS Code is set to the .venv."
+# ------------------------------------------------------------------
+# 3️⃣ Se NÃO existir projeto
+# ------------------------------------------------------------------
+if [ "${RUN_INITIAL_SETUP}" = "true" ]; then
+  echo "Initializing new uv project"
 
-echo "--- Post-Create Script Finished ---"
+  if [ -n "${PROJECT_NAME}" ]; then
+    uv init --name "${PROJECT_NAME}" --python "${PYTHON_VERSION}"
+  else
+    uv init --python "${PYTHON_VERSION}"
+  fi
+
+  uv sync
+else
+  echo "No project initialized (runInitialSetup=false)"
+  echo ".venv is ready and active"
+fi
+
+echo "=== Post-create finished ==="
