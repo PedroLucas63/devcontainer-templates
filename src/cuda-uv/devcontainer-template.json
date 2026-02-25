@@ -1,8 +1,8 @@
 {
     "id": "cuda-uv",
-    "version": "2.0.0",
-    "name": "CUDA 12 + UV Template",
-    "description": "Professional CUDA 12 development environment with 'uv' for Python package management and shared cache.",
+    "version": "2.0.1",
+    "name": "CUDA 13 + UV Template",
+    "description": "Professional CUDA 13 development environment with 'uv' for Python package management and shared cache.",
     "options": {
         "pythonVersion": {
             "type": "string",

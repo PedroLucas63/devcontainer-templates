@@ -1,5 +1,5 @@
 {
-  "name": "CUDA 12 + UV",
+  "name": "CUDA 13 + UV",
   "build": {
     "dockerfile": "Dockerfile"
   },
