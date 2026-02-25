@@ -9,6 +9,7 @@
   "hostRequirements": {
     "gpu": "optional"
   },
+  "containerUser": "vscode",
   "remoteUser": "vscode",
   "mounts": [
     "source=uv-cache,target=/home/vscode/.cache/uv,type=volume"

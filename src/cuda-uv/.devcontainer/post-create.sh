@@ -11,17 +11,6 @@ echo "Project name: ${PROJECT_NAME}"
 echo "Run initial setup: ${RUN_INITIAL_SETUP}"
 
 export PATH="/usr/local/bin:${PATH}"
-export UV_CACHE_DIR="/home/vscode/.cache/uv"
-
-# ------------------------------------------------------------------
-# 0️⃣ Garantir permissões do cache do uv (volume pode vir como root)
-# ------------------------------------------------------------------
-mkdir -p "${UV_CACHE_DIR}" || sudo mkdir -p "${UV_CACHE_DIR}"
-if ! touch "${UV_CACHE_DIR}/.write-test" 2>/dev/null; then
-  echo "Fixing UV cache permissions at ${UV_CACHE_DIR}"
-  sudo chown -R "$(id -u):$(id -g)" "${UV_CACHE_DIR}"
-fi
-rm -f "${UV_CACHE_DIR}/.write-test" 2>/dev/null || true
 
 # ------------------------------------------------------------------
 # 1️⃣ SEMPRE garantir que a .venv exista
