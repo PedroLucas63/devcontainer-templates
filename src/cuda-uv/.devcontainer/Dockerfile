@@ -36,6 +36,9 @@ ENV XDG_CACHE_HOME=/home/${USERNAME}/.cache
 ENV STARSHIP_CACHE=/home/${USERNAME}/.cache/starship
 ENV STARSHIP_LOG=error
 
+# Set UV environment variables
+ENV UV_LINK_MODE=copy
+
 RUN mkdir -p /home/${USERNAME}/.cache/starship \
     && chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.cache
 

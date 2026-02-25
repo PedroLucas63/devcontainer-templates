@@ -11,7 +11,7 @@
   },
   "remoteUser": "vscode",
   "mounts": [
-    "source=global-uv-cache,target=/home/vscode/.cache/uv,type=volume"
+    "source=uv-cache,target=/home/vscode/.cache/uv,type=volume"
   ],
   "customizations": {
     "vscode": {
